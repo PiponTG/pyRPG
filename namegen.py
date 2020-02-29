@@ -17,10 +17,11 @@ def create_name_list(listpop):
         names_list.append((create_name(randint(2, 5), name_parts)).capitalize())
     return names_list
 
-for names in create_name_list(20):
-    print(names)
+#for names in create_name_list(20):
+#    print(names)
 
 
-
-
-
+with open("saves/Names.txt","w+") as f:
+    print("f")
+    f.write("Aname")
+print("f")
