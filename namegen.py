@@ -22,6 +22,7 @@ def create_name_list(listpop):
 
 
 with open("saves/Names.txt","w+") as f:
-    print("f")
-    f.write("Aname")
-print("f")
+    for names in create_name_list(20):
+        f.write(names + '\n')
+
+print("gen complete")
