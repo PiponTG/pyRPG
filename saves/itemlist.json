@@ -4,5 +4,17 @@
         "name": "Frozen Fireball",
         "description": "You`re hot and you`re cold",
         "price": 500
+    },
+    {
+        "i_type": "Consumable",
+        "name": "Blue Potion",
+        "description": "You know what this is! :o",
+        "effects": []
+    },
+    {
+        "i_type": "KeyItem",
+        "name": "Huge Key",
+        "description": "I thought the door would be... bigger..",
+        "key_id": 1
     }
 ]

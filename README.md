@@ -15,6 +15,7 @@ SQUALL!
 # ---TODO---
 - clean up item list
 - item gui (tk?)
+- item effects
 
 - test queue for battles
 - save player characters
