@@ -4,6 +4,7 @@ class ItemList:
     def __init__(self):
         self.item_list = self.load_item_list()
 
+    #Loads item list from json file "SAVES/itemlist.json" into
     @staticmethod
     def load_item_list():
         item_list = []
@@ -22,7 +23,6 @@ class ItemList:
                 else:
                     print('ERROR - UNRECOGNIZED TYPE')
         return item_list
-
     def save_item_list(self):
         dict_list = []
         for items in self.item_list:
@@ -32,7 +32,14 @@ class ItemList:
 
     def print_item_list(self):
         for items in self.item_list:
-            print(items.get_name())
+            print(items.get_name(), '\n')
+    def get_item(self, item_name):
+        for items in self.item_list:
+            if(items.get_name() == item_name):
+                return items
+        print('unable to find item')
+        return None
+
 
 
 class Item:
@@ -48,9 +55,6 @@ class Item:
         self.name = name
     def set_description(self, description):
         self.description = description
-
-
-
 class Treasure(Item):
     def __init__(self, price=0, **stats):
         super().__init__(**stats)
@@ -66,8 +70,6 @@ class Treasure(Item):
                 'name': self.name,
                 'description': self.description,
                 'price': self.price}
-
-
 class Consumable(Item):
     def __init__(self, effects=None, **stats):
         super().__init__(**stats)
@@ -81,8 +83,6 @@ class Consumable(Item):
                 'name': self.name,
                 'description': self.description,
                 'effects': self.effects}
-
-
 class KeyItem(Item):
     def __init__(self, key_id='000', **stats):
         super().__init__(**stats)
@@ -98,8 +98,6 @@ class KeyItem(Item):
                 'name': self.name,
                 'description': self.description,
                 'key_id': self.key_id}
-
-
 class Equipment(Item):
     def __init__(self, e_type=None, effects=None, **stats):
         super().__init__(**stats)
@@ -119,48 +117,45 @@ class Equipment(Item):
 class Bag:
     def __init__(self, contents=[]):
         self.contents = contents
-        if len(self.contents) == 0:
-            self.empty = True
-        else:
-            self.empty = False
-    def is_Bag(self):
-        return True
+
     def is_empty(self):
         if len(self.contents) == 0:
             return True
         else:
             return False
 
-    def add_item(self, item, quantity=1):
-        flag = False
+    def add_item(self, item_name, quantity=1):
         for items in self.contents:
-            if items[1] == item:
+            if items['name'] == item_name:
                 flag = True
-                items[2] += quantity
-                if items[2] > 99:
-                    items[2] = 99
-        if not flag:
-            # need to replace Item() object here and replace it with load_item(name)
-            self.contents.append([Item(), int(quantity)])
+                items['quantity'] += quantity
+                if items['quantity'] > 99:
+                    items['quantity'] = 99
+                return
 
-    def remove_item(self, item, quantity=1):
+        self.contents.append({'name': item_name, 'quantity': int(quantity)})
+
+    def remove_item(self, item_name, quantity=1):
         for items in self.contents:
-            if items[0].get_name() == item:
-                items[1] -= quantity
-                if items[1] <= 0:
+            if items['name'] == item_name:
+                items['quantity'] -= quantity
+                if items['quantity'] <= 0:
                     self.contents.remove(items)
+                return
 
+        print('item not found. unable to remove')
 
     def get_contents(self):
-        for items in self.contents:
-            pass
+        return self.contents
+
     def print_inv(self):
         if not self.is_empty():
             for items in self.contents:
-                print(items[0].get_name() + ': ' + str(items[1]))
+                print(items['name'] + ': ' + str(items['quantity']))
         else:
             print('bag empty')
 
+i = ItemList()
 
 
 
