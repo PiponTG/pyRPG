@@ -4,7 +4,8 @@ class ItemList:
     def __init__(self):
         self.item_list = self.load_item_list()
 
-    def load_item_list(self):
+    @staticmethod
+    def load_item_list():
         item_list = []
         with open('saves/itemlist.json', 'r') as f:
             json_decode = json.load(f)
@@ -41,11 +42,23 @@ class Item:
 
     def get_name(self):
         return self.name
+    def get_description(self):
+        return self.description
+    def set_name(self, name):
+        self.name = name
+    def set_description(self, description):
+        self.description = description
+
 
 
 class Treasure(Item):
     def __init__(self, price=0, **stats):
         super().__init__(**stats)
+        self.price = price
+
+    def get_price(self):
+        return self.price
+    def set_price(self, price):
         self.price = price
 
     def get_kw(self):
@@ -75,6 +88,11 @@ class KeyItem(Item):
         super().__init__(**stats)
         self.key_id = key_id
 
+    def get_key_id(self):
+        return self.key_id
+    def set_key_id(self, key_id):
+        self.key_id = key_id
+
     def get_kw(self):
         return {'i_type': 'KeyItem',
                 'name': self.name,
@@ -98,49 +116,6 @@ class Equipment(Item):
                 'e_type': self.e_type,
                 'effects': self.effects}
 
-
-#i = ItemList()
-'''
-class Item:
-    def __init__(self, name='???', description='What is this?'):
-        self.name = name
-        self.description = description
-    def get_name(self):
-        return self.name
-    def get_description(self):
-        return self.description
-    def set_name(self, name):
-        self.name = name
-    def set_description(self, description):
-        self.description = description
-
-class Consumable(Item):
-    def __init__(self, effects=None, **stats):
-        super().__init__(**stats)
-        if effects is None:
-            effects = []
-        self.effects = effects
-
-class KeyItem(Item):
-    def __init__(self, key_id=0, **stats):
-        super().__init__(**stats)
-        self.key_id = key_id
-
-class Equipment(Item):
-    def __init__(self, effects=[], type='head'):
-        pass
-class Treasures(Item):
-    def __init__(self, price=0, **stats):
-        super().__init__(**stats)
-        self.price = price
-    def get_price(self):
-        return self.price
-    def set_price(self, price):
-        self.price = price
-
-def load_items(name='???'):
-    pass
-'''
 class Bag:
     def __init__(self, contents=[]):
         self.contents = contents
