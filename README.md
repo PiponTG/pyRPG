@@ -13,9 +13,13 @@ SQUALL!
 
 
 # ---TODO---
-- clean up item list
+- add edit item functionality to Items.py
+
 - item gui (tk?)
 - item effects
+- loot table for enemies
+
+
 
 - test queue for battles
 - save player characters

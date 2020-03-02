@@ -4,7 +4,7 @@ class ItemList:
     def __init__(self):
         self.item_list = self.load_item_list()
 
-    #Loads item list from json file "SAVES/itemlist.json" into
+    # Loads item list from json file "SAVES/itemlist.json"
     @staticmethod
     def load_item_list():
         item_list = []
@@ -23,6 +23,7 @@ class ItemList:
                 else:
                     print('ERROR - UNRECOGNIZED TYPE')
         return item_list
+
     def save_item_list(self):
         dict_list = []
         for items in self.item_list:
@@ -30,22 +31,61 @@ class ItemList:
         with open('saves/itemlist.json', 'w+') as f:
             json.dump(dict_list, f, indent=4)
 
-    def add_item(self, item, name=None, description=None, price=None, effects=None, key_id=None, e_type=None):
-        # ability to add new items to the itemlist
-        # need to be able to create item with or without attributes
-        # newItem as a default name scheme might be nice (newItem (2))
-        pass
+    def add_item(self, i_type=None, name=None, description=None, price=None, effects=None, key_id=None, e_type=None):
+        if name is None:
+            print('an item needs a name!')
+            return
+
+        # pre-generates created item
+        if i_type == 'Treasure':
+            stats = {'name': name,
+                     'description': description,
+                     'price': price}
+            new_item = Treasure(**stats)
+        elif i_type == 'Consumable':
+            stats = {'name': name,
+                     'description': description,
+                     'effects': effects}
+            new_item = Consumable(**stats)
+        elif i_type == 'KeyItem':
+            stats = {'name': name,
+                     'description': description,
+                     'key_id': key_id}
+            new_item = KeyItem(**stats)
+        elif i_type == 'Equipment':
+            stats = {'name': name,
+                     'description': description,
+                     'effects': effects,
+                     'e_type': e_type}
+            new_item = Equipment(**stats)
+
+
+
+
+        for items in self.item_list:
+            # overwrites old item with same name
+            if items.get_name() == name:
+                items = new_item
+                return
+        # if it cant find an item with that name it makes one up
+        self.item_list.append(new_item)
+
     def remove_item(self, name=None):
-        # ability to remove an item from the list.
-        # just find the item
-        # delete its entry in the list
-        pass
+        if name is None:
+            print('an item needs a name!')
+            return
+
+        for items in self.item_list:
+            if items.get_name() == name:
+                self.item_list.remove(items)
+                return
+        print('item not found')
+
     def edit_item(self, item, name=None, description=None, price=None, effects=None, key_id=None, e_type=None):
         # ability to load item and change its attributes
         # (will be more useful when i have a GUI to preload  the values in)
         # check for None, if not None: change the values!
         pass
-
 
     def sort_item_list(self, sort_key='name'):
         if sort_key is 'name':
@@ -79,9 +119,11 @@ class ItemList:
 
         for items in self.item_list:
             print(items.get_name())
+
     def print_item_list(self):
         for items in self.item_list:
             print(items.get_name())
+
     def get_item(self, item_name=''):
         if item_name is '':
             print('error - no name provided')
@@ -205,7 +247,6 @@ class Bag:
     def add_item(self, item_name, quantity=1):
         for items in self.contents:
             if items['name'] == item_name:
-                flag = True
                 items['quantity'] += quantity
                 if items['quantity'] > 99:
                     items['quantity'] = 99
@@ -226,6 +267,7 @@ class Bag:
 
     def get_contents(self):
         return self.contents
+
     def print_inv(self):
         if not self.is_empty():
             for items in self.contents:

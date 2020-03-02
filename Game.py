@@ -1,7 +1,5 @@
-import Items as i
-import Characters as c
 
-player = c.load_data('Georgio')
+
 
 
 '''

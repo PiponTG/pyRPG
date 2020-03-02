@@ -1,7 +1,7 @@
 from random import randint
 import json
 
-def save_data(player='DEFAULT'):
+def save_player(player='DEFAULT'):
     if player == 'DEFAULT':
         file_name = 'saves/default_SAVE.json'
         with open(file_name, 'w+') as f:
@@ -52,7 +52,8 @@ def save_data(player='DEFAULT'):
                 # 'dead':player.is_dead(),
 
             }, f, indent=4)
-def load_data(player_name='default'):
+
+def load_player(player_name='default'):
     file_name = 'saves/' + player_name + '_SAVE.json'
     with open(file_name) as f:
         stats = json.load(f)
@@ -180,6 +181,7 @@ class Character:
                 self.maxhp,
                 self.mp,
                 self.maxmp))
+
 class Monster(Character):
 
     def __init__(self, name, **x):
@@ -200,6 +202,7 @@ class Monster(Character):
 
     def calc_loot_reward(self):
         pass
+
 class Player(Character):
     def __init__(self, name='player', money=30, xp=0, inventory=None, **stats):
         super().__init__(**stats)

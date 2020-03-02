@@ -1,9 +1,9 @@
 [
     {
-        "i_type": "Treasure",
-        "name": "Frozen Fireball",
-        "description": "You`re hot and you`re cold",
-        "price": 500
+        "i_type": "Consumable",
+        "name": "Black Potion",
+        "description": "Why do I have to be the BLACK potion??",
+        "effects": []
     },
     {
         "i_type": "Consumable",
@@ -12,9 +12,39 @@
         "effects": []
     },
     {
+        "i_type": "Consumable",
+        "name": "Red Potion",
+        "description": "Cliche, yet handy!",
+        "effects": []
+    },
+    {
         "i_type": "KeyItem",
         "name": "Huge Key",
         "description": "I thought the door would be... bigger..",
         "key_id": 1
+    },
+    {
+        "i_type": "Treasure",
+        "name": "Ancient Artifact",
+        "description": "It say's \"made in china\" on the bottom",
+        "price": 300
+    },
+    {
+        "i_type": "Treasure",
+        "name": "Frozen Fireball",
+        "description": "You`re hot and you`re cold",
+        "price": 500
+    },
+    {
+        "i_type": "Treasure",
+        "name": "Jade Vase",
+        "description": "Its shaped like Jade from MK.. nice...",
+        "price": 400
+    },
+    {
+        "i_type": "Treasure",
+        "name": "Motorola Razr",
+        "description": "You are the coolest kid in class",
+        "price": 2000
     }
 ]
