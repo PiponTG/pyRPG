@@ -30,9 +30,22 @@ class ItemList:
         with open('saves/itemlist.json', 'w+') as f:
             json.dump(dict_list, f, indent=4)
 
-    def print_item_list(self):
-        for items in self.item_list:
-            print(items.get_name())
+    def add_item(self, item, name=None, description=None, price=None, effects=None, key_id=None, e_type=None):
+        # ability to add new items to the itemlist
+        # need to be able to create item with or without attributes
+        # newItem as a default name scheme might be nice (newItem (2))
+        pass
+    def remove_item(self, name=None):
+        # ability to remove an item from the list.
+        # just find the item
+        # delete its entry in the list
+        pass
+    def edit_item(self, item, name=None, description=None, price=None, effects=None, key_id=None, e_type=None):
+        # ability to load item and change its attributes
+        # (will be more useful when i have a GUI to preload  the values in)
+        # check for None, if not None: change the values!
+        pass
+
 
     def sort_item_list(self, sort_key='name'):
         if sort_key is 'name':
@@ -93,8 +106,10 @@ class Item:
         self.name = name
     def set_description(self, description):
         self.description = description
+
     def get_type(self):
         return 'Item'
+
 class Treasure(Item):
     def __init__(self, price=0, **stats):
         super().__init__(**stats)
@@ -104,6 +119,7 @@ class Treasure(Item):
         return self.price
     def set_price(self, price):
         self.price = price
+
     def get_type(self):
         return 'Treasure'
     def get_kw(self):
@@ -111,6 +127,7 @@ class Treasure(Item):
                 'name': self.name,
                 'description': self.description,
                 'price': self.price}
+
 class Consumable(Item):
     def __init__(self, effects=None, **stats):
         super().__init__(**stats)
@@ -118,6 +135,19 @@ class Consumable(Item):
             self.effects = []
         else:
             self.effects = effects
+
+    def get_effects(self):
+        return self.effects
+
+    def add_effect(self, effect):
+        # once effects are created for weapons/equipment we can use this to give current armor new effects! UPGRADES!
+        # when same effect is active it will be overwritten when you add it again
+        pass
+    def remove_effect(self, effect):
+        # can remove old effects from weapons/equipment
+        pass
+
+
     def get_type(self):
         return 'Consumable'
     def get_kw(self):
@@ -125,6 +155,7 @@ class Consumable(Item):
                 'name': self.name,
                 'description': self.description,
                 'effects': self.effects}
+
 class KeyItem(Item):
     def __init__(self, key_id='000', **stats):
         super().__init__(**stats)
@@ -134,6 +165,7 @@ class KeyItem(Item):
         return self.key_id
     def set_key_id(self, key_id):
         self.key_id = key_id
+
     def get_type(self):
         return 'KeyItem'
     def get_kw(self):
@@ -141,6 +173,7 @@ class KeyItem(Item):
                 'name': self.name,
                 'description': self.description,
                 'key_id': self.key_id}
+
 class Equipment(Item):
     def __init__(self, e_type=None, effects=None, **stats):
         super().__init__(**stats)
@@ -149,6 +182,7 @@ class Equipment(Item):
             self.effects = []
         else:
             self.effects = effects
+
     def get_type(self):
         return 'Equipment'
     def get_kw(self):
@@ -161,11 +195,13 @@ class Equipment(Item):
 class Bag:
     def __init__(self, contents=[]):
         self.contents = contents
+
     def is_empty(self):
         if len(self.contents) == 0:
             return True
         else:
             return False
+
     def add_item(self, item_name, quantity=1):
         for items in self.contents:
             if items['name'] == item_name:
@@ -174,8 +210,11 @@ class Bag:
                 if items['quantity'] > 99:
                     items['quantity'] = 99
                 return
+        try:
+            self.contents.append({'name': item_name, 'quantity': int(quantity), 'type': i.get_item(item_name).get_type()})
+        except:
+            print('item does not exist')
 
-        self.contents.append({'name': item_name, 'quantity': int(quantity), 'type': i.get_item(item_name).get_type()})
     def remove_item(self, item_name, quantity=1):
         for items in self.contents:
             if items['name'] == item_name:
@@ -183,8 +222,8 @@ class Bag:
                 if items['quantity'] <= 0:
                     self.contents.remove(items)
                 return
-
         print('item not found. unable to remove')
+
     def get_contents(self):
         return self.contents
     def print_inv(self):
@@ -193,6 +232,7 @@ class Bag:
                 print('<' + items['type'] + '> ' + items['name'] + ': ' + str(items['quantity']))
         else:
             print('bag empty')
+
     def sort_content_list(self, sort_key='name'):
         if sort_key is 'name':
             self.contents.sort(key=lambda x: x['name'])
