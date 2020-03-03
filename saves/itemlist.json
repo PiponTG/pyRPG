@@ -26,7 +26,7 @@
     {
         "i_type": "Treasure",
         "name": "Ancient Artifact",
-        "description": "It say's \"made in china\" on the bottom",
+        "description": "It says \"made in china\" on the bottom",
         "price": 300
     },
     {
@@ -46,5 +46,18 @@
         "name": "Motorola Razr",
         "description": "You are the coolest kid in class",
         "price": 2000
+    },
+    {
+        "i_type": "Treasure",
+        "name": "Bird Law Degree",
+        "description": "They really do give these to anyone",
+        "price": 25
+    },
+
+    {
+        "i_type": "Consumable",
+        "name": "Purple Potion",
+        "description": "Should not be mixed with other potions",
+        "effects": []
     }
 ]
