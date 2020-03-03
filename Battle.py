@@ -51,6 +51,8 @@ class Battle:
 
         # resolves effects
 
+        # calculate action's consequence
+
         # progress the timeline one step
         self.time += 1
         return
