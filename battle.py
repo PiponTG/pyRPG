@@ -12,11 +12,13 @@ class Battle:
         # this should be a list of dictionaries (keys = character and team)
         self.characters = characters
         self.stage = stage
+        self.timeline = []
         self.time = 0
+
 
     def start_battle(self):
         # generate the timeline
-        timeline = []
+        self.timeline = []
         self.time = 0
 
         # determine speed advantage
@@ -25,15 +27,37 @@ class Battle:
             # create this function in player.py
 
     def take_turn(self):
+        active_characters = []
+        for c in self.characters:
+            if c['pos'] == self.time:
+                active_characters.append(c)
+
+        for c in active_characters:
+
+            if c.is_player():
+                # input from player
+                self.perform_action()
+                pass
+            else:
+                # input from AI
+                self.perform_action()
+                pass
+
+        # go down the list of characters performing the actions below
 
         # display options
         # take action
         # select target
+
         # resolves effects
 
         # progress the timeline one step
         self.time += 1
         return
+
+    def perform_action(self, action_id=0, target_names=[]):
+        # does a move
+        # takes in a move ID and targets. If there are too many targets it selects the first one
 
     def end_battle(self):
         # generates loot for winning team (if player)

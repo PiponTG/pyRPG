@@ -135,6 +135,9 @@ class Character:
     def set_res(self, res):
         self.res = res
 
+    def is_player(self):
+        return True
+
     def die(self):
         self.hp = 0
         self.dead = True
@@ -191,6 +194,9 @@ class Monster(Character):
         self.set_mp(self.maxmp)
         self.gold_reward = self.calc_gold_reward()
         self.xp_reward = self.calc_xp_reward()
+
+    def is_player(self):
+        return False
 
     def calc_gold_reward(self):
         maxrange = (100 * self.lvl)
