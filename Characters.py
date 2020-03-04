@@ -158,6 +158,9 @@ class Character:
         if self.mp <= 0:
             self.mp = 0
 
+    def get_spd_advantage(self):
+        return 1
+
     def to_string(self):
         '''
         print('**CHARACTER SHEET**')
