@@ -1,3 +1,13 @@
+#todo
+# create function to retrieve stats modified by effects.
+# def get_mod_stat(stat):
+#
+#   calculate stat change from effects
+#
+#   modified_stat += stat_change
+#   return modified_stat
+
+
 from random import randint
 import json
 
