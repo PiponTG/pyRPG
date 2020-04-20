@@ -11,16 +11,20 @@ different environments causing moves to be more or less effective - locations ha
 Randomly generated antagonists - stats can be mixed within a range for each new level/location
 SQUALL!
 
+<Add Raffys Part here>
+
 
 # ---TODO---
 - add edit item functionality to Items.py
 
 - item gui (tk?)
 - item effects
+
+- generate random/defined enemy characters
 - loot table for enemies
-
-
 
 - test queue for battles
 - save player characters
-- generate random/defined enemy characters
+
+- add effects 
+- add action 
